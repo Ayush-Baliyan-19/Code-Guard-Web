@@ -5,18 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { getServerSession } from "next-auth/next"
 import axios from 'axios'
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions"
-
-interface Project {
-  id: string;
-  name: string;
-  configuration?: {
-    id: string;
-    tabSpace: number;
-    useJsDocs: boolean;
-    useSemicolons: boolean;
-    useSingleQuotes: boolean;
-  };
-}
+import { Project } from "@prisma/client"
 
 const fetchUserProjects = async (userId: string) => {
   const res = await axios.post(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getProjects`, {
@@ -45,12 +34,11 @@ export default async function Projects() {
             </CardHeader>
             <CardContent>
               <div>
-                {project.configuration ? (
+                {project ? (
                   <>
-                    <p>Tab Space: {project.configuration.tabSpace}</p>
-                    <p>Use JSDoc: {project.configuration.useJsDocs ? 'Yes' : 'No'}</p>
-                    <p>Use Semicolons: {project.configuration.useSemicolons ? 'Yes' : 'No'}</p>
-                    <p>Use Single Quotes: {project.configuration.useSingleQuotes ? 'Yes' : 'No'}</p>
+                    <p>Tab Space: {project.tabSize}</p>
+                    <p>Use JSDoc: {project.jsdoc ? 'Yes' : 'No'}</p>
+                    <p>Use Single Quotes: {project.quotes=='single' ? 'Yes' : 'No'}</p>
                   </>
                 ) : (
                   <p>No configuration found</p>

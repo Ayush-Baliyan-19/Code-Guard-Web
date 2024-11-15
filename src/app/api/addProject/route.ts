@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 export async function POST(request: NextRequest) {
     try {
         const { userId, project } = await request.json();
-        console.log(userId, project);
         if (!userId || !project) {
             return NextResponse.json({ error: "Missing userId or project data" }, { status: 400 });
         }
