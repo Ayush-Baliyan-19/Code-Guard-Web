@@ -1,3 +1,4 @@
+"use server"
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
@@ -18,7 +19,7 @@ interface Project {
 }
 
 const fetchUserProjects = async (userId: string) => {
-  const res = await axios.get(`/api/getProjects?userId=${userId}`, {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getProjects`, {
     params: {
       userId,
     },

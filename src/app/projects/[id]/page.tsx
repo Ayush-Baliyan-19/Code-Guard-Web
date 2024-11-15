@@ -44,7 +44,7 @@ export default function ProjectConfig() {
     // Here you would typically send the config to your backend
     console.log('Submitting config:', config)
     // Generate and display the configuration key
-    const response = await axios.post('api/addProject', { userId:data?.user?.name, project: config })
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_LOCAL_URL}api/addProject`, { userId:data?.user?.name, project: config })
     alert(`Configuration saved successfully. Your configuration key is: ${response.data.projectId}`)
   }
 
