@@ -19,10 +19,8 @@ interface Project {
 }
 
 const fetchUserProjects = async (userId: string) => {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getProjects`, {
-    params: {
-      userId,
-    },
+  const res = await axios.post(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/getProjects`, {
+    userId 
   });
   const projects = res.data;
   return projects;

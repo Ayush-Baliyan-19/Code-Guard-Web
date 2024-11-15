@@ -11,12 +11,10 @@ export const db = globalForPrisma.prisma ?? new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = db;
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     // Get userId from searchParams
-    const searchParams = request.nextUrl.searchParams;
-    const userId = searchParams.get("userId");
-
+    const {userId} = await request.json();
     if (!userId) {
       return NextResponse.json(
         { error: "Missing or invalid userId" },
