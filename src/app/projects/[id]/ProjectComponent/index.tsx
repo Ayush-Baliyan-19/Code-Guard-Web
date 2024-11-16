@@ -75,6 +75,21 @@ const handleSubmit = async (e: React.FormEvent) => {
         alert("Failed to save configuration. Please try again.");
     }
 };
+const handleDelete = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+        // Here you would typically send the config to your backend
+        // Generate and display the configuration key
+        await axios.post(
+            `${process.env.NEXT_PUBLIC_LOCAL_URL}/api/deleteProject`,
+            { userId: data?.user?.name, project: { ...config, id: project.id } }
+        );
+        alert(`Configuration saved successfully for project ${name}.`);
+    } catch (error) {
+        console.error("Error saving configuration:", error);
+        alert("Failed to save configuration. Please try again.");
+    }
+};
 
   return (
     <Card>
@@ -166,6 +181,9 @@ const handleSubmit = async (e: React.FormEvent) => {
       <CardFooter>
         <Button type="submit" onClick={handleSubmit}>
           Save Configuration
+        </Button>
+        <Button type="submit" onClick={handleDelete}>
+          Delete Project
         </Button>
       </CardFooter>
     </Card>

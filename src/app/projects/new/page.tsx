@@ -47,6 +47,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         // Generate and display the configuration key
         const response = await axios.post(`${process.env.NEXT_PUBLIC_LOCAL_URL}/api/addProject`, { userId: data?.user?.name, project: config })
         alert(`Configuration saved successfully. Your configuration key is: ${response.data.projectId}`)
+        window.location.href = '/projects'
     } catch (error) {
         console.error('Error saving configuration:', error)
         alert('Failed to save configuration. Please try again.')
