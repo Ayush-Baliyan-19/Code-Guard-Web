@@ -14,14 +14,6 @@ export async function POST(request: NextRequest) {
         // This means you can't simply delete the project without also updating the user's project association.
         // To fix this, you need to first remove the project from the user's list of projects before deleting the project.
 
-        await prisma.user.update({
-            where: { id: userId },
-            data: {
-                projects: {
-                    disconnect: { id: project.id },
-                },
-            },
-        });
         await prisma.project.delete({
             where: { id: project.id }
         });
