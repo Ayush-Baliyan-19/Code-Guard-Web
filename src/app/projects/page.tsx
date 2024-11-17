@@ -46,7 +46,7 @@ export default async function Projects() {
               </div>
               <div className="mt-4">
                 <Button asChild variant="outline">
-                  <Link href={`/projects/${project.id}`}>
+                  <Link href={`/projects/${project.name}`}>
                     Configure
                   </Link>
                 </Button>

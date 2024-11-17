@@ -5,14 +5,14 @@ const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
-    const { projectId } = await request.json();
+    const { projectName } = await request.json();
 
-    if (!projectId) {
-      return NextResponse.json({ error: "Missing projectId" }, { status: 400 });
+    if (!projectName) {
+      return NextResponse.json({ error: "Missing projectName" }, { status: 400 });
     }
 
-    const project = await prisma.project.findUnique({
-      where: { id: projectId },
+    const project = await prisma.project.findFirst({
+      where: { name: projectName },
     });
 
     if (!project) {
